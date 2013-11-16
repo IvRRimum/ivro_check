@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+puts "QUaslinks - Checks urls form library \n"
+puts "by Quas_ogj. \n"
+print 'Please enter link you want to check: ' 
+Link = gets.chomp
+
+@sublink = ["/inc", "/include", "/includes", "/sys", "/admin", "/admin_panel", "/acp", "/cp", "/inc/admin", "/inc/admicp", "/inc/acp", "/inc/cp",
+"/include/admin", "/include/admincp", "/inc/admin_panel", "/include/admin_panel", "/includes/admin", "/includes/admincp",  "/assets", "/css", "/img",
+"/images", "/style", "/css", "/js", "/Javascript", "/Fpoll", "Fpoll/admincp", "/Fpoll/admincp/install.php"]
+
+if File.file?(Link + ".log")
+	File.delete(Link + ".log")
+end
+
+
+@sublink.each do |s|
+
+%x(wget --no-cache --spider --append-output="#{Link}.log" "#{Link + s }")
+
+end
+
+%x( chmod 777 "#{Link}.log" )
+
+@alllines = []
+@repo = []
+@fort = []
+@line = 0
+
+File.open(Link + ".log").each_line do |line|
+	@line += 1
+
+	@alllines.push(line)
+
+	if line.include?("301") 
+		@repo.push(@line)
+	end
+
+	if line.include?("403")
+		@fort.push(@line)
+	end
+
+end
+
+@repo.each do |ll|
+	num = ll # 13
+
+	puts "[ 301 ]   " + @alllines[num]
+
+end
+
+@fort.each do |ll|
+	num = ll - 5 # 13
+
+	puts "[ 403 ]   " + @alllines[num]
+
+end
+
+File.delete(Link + ".log")
