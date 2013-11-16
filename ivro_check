@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
-puts "QUaslinks - Checks urls form library \n"
-puts "by Quas_ogj. \n"
+puts "Ivro_check - Checks urls form library \n"
+puts "by IvRR!mUm. \n"
 print 'Please enter link you want to check: ' 
 Link = gets.chomp
 
 @sublink = ["/inc", "/include", "/includes", "/sys", "/admin", "/admin_panel", "/acp", "/cp", "/inc/admin", "/inc/admicp", "/inc/acp", "/inc/cp",
 "/include/admin", "/include/admincp", "/inc/admin_panel", "/include/admin_panel", "/includes/admin", "/includes/admincp",  "/assets", "/css", "/img",
-"/images", "/style", "/css", "/js", "/Javascript", "/Fpoll", "Fpoll/admincp", "/Fpoll/admincp/install.php"]
+"/images", "/style", "/css", "/js", "/Javascript", "/Fpoll", "Fpoll/admincp", "/Fpoll/admincp/install.php", "administrator", "labot", "mainit", "administracija", "special"]
 
 if File.file?(Link + ".log")
 	File.delete(Link + ".log")
@@ -44,14 +44,14 @@ end
 @repo.each do |ll|
 	num = ll # 13
 
-	puts "[ 301 ]   " + @alllines[num]
+	puts "[ 301 - Link have been Found ]   " + @alllines[num]
 
 end
 
 @fort.each do |ll|
 	num = ll - 5 # 13
 
-	puts "[ 403 ]   " + @alllines[num]
+	puts "[ 403 - Link is found, but is forbidden ]   " + @alllines[num]
 
 end
 
